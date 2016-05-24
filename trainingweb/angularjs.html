@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Qucheng Shen</title>
+	
+	<!-- w3 CSS -->
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<style>
+	#calculator ul{ margin:0px; padding:0px;}
+
+	#calculator li{ list-style:none;}
+	
+	#calculator input{ width:406px; height:82px; margin:10px 7px 0px; border-radius:5px; border:1px solid #64655F; box-shadow:0px 5px 2px rgba(157,157,145,0.8) inset; -webkit-box-shadow:0px 5px 2px rgba(157,157,145,0.8) inset; outline:none; background:#FCFDEB; text-align:right; font-size:40px; padding:0px 10px;}
+	.buttonStyle{ width:74px; height:34px;  text-align:center;  border:1px solid #8B8B8B; border-radius:5px; float:left; margin:12px 6px 0px;}
+
+	.calBox{
+		width: 460px;
+		background: #FDFDFD;
+		border-radius: 5px;
+		background: #F9F9F9;
+	}
+
+	@font-face {
+		font-family: 'digi';
+		src: url('http://cssdeck.com/uploads/resources/fonts/digii/DS-DIGII.TTF');
+	}
+
+	.clock {
+		font-family: 'digi';
+		font-size:70px;
+	}
+</style>
+
+</head>
+
+<body ng-app='myApp'>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Training Dashboard</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>Peiwei Mi</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Finish your homework!</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Completed: <span class="label label-default">Bootstrap</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Uncompleted:<span class="label label-danger">JavaScript</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Qucheng Shen <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> HomePage</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-list"></i> Bootstrap <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="bootstrap_homework2.html"><i class="fa fa-fw fa-file-code-o"></i> Homework#2</a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-fw fa-file-code-o"></i> Homework#3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript.html"><i class="fa fa-fw fa-paperclip"></i> Javascript</a>
+                    </li>
+					<li class="active">
+                        <a href="angularjs.html"><i class="fa fa-fw fa-paperclip"></i> Angular JS</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Angular JS <small>Homework</small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /.row -->
+				
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework6">Homework#6 </a></h3>
+					</div>
+					<!-- Homework6 Modal -->
+					<div ng-controller="home6Ctrl" id="Homework6" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">Homework#6: </h4>
+						  </div>
+						  <div class="modal-body">
+						  
+							<div class="w3-container">
+
+								<h3>Users</h3>
+								<form class="form-inline">
+									<div class="form-group">
+										<label> Search </label>
+										<input type="text" ng-model="search" class="form-control" placeholder="Search">
+									</div>
+								</form>
+								<table class="w3-table w3-bordered w3-striped">
+								  <tr>
+									<th>Edit</th>
+									<th>Delete</th>
+									<th ng-click="sort('id')">Id
+										<span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('fName')">First Name
+										<span class="glyphicon sort-icon" ng-show="sortKey=='fName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('lName')">Last Name
+										<span class="glyphicon sort-icon" ng-show="sortKey=='lName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('Age')">Age
+										<span class="glyphicon sort-icon" ng-show="sortKey=='Age'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('Sex')">Sex
+										<span class="glyphicon sort-icon" ng-show="sortKey=='Sex'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('Major')">Major
+										<span class="glyphicon sort-icon" ng-show="sortKey=='Major'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+								  </tr>
+								  <tr dir-paginate = "user in users | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
+									<td>
+									  <button class="w3-btn w3-ripple" ng-click="editUser(user.id)">&#9998; Edit</button>
+									</td>
+									<td>
+									  <button class="w3-btn w3-ripple" ng-click="deleteUser(user.id)">Delete</button>
+									</td>
+									<td>{{ user.id }}</td>
+									<td>{{ user.fName }}</td>
+									<td>{{ user.lName }}</td>
+									<td>{{ user.Age }}</td>
+									<td>{{ user.Sex }}</td>
+									<td>{{ user.Major }}</td>									
+								  </tr>
+								</table>
+								<dir-pagination-controls
+								   max-size="5"
+								   direction-links="true"
+								   boundary-links="true" >
+								</dir-pagination-controls>
+								<br>
+								<button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
+
+								<form ng-hide="hideform">
+								  <h3 ng-show="edit">Create New User:</h3>
+								  <h3 ng-hide="edit">Edit User:</h3>
+								  <input ng-hide="true" type="text" ng-model="userid" ng-disabled="true">
+									<label>First Name:</label>
+									<input class="w3-input w3-border" type="text" ng-model="fName" ng-disabled="!edit" placeholder="First Name">
+								  <br>
+									<label>Last Name:</label>
+									<input class="w3-input w3-border" type="text" ng-model="lName" ng-disabled="!edit" placeholder="Last Name">
+								  <br>
+									<label>Age:</label>
+									<input class="w3-input w3-border" type="text" ng-model="Age" ng-disabled="!edit" placeholder="Age">
+								  <br>
+									<label>Sex:</label>
+									<input class="w3-input w3-border" type="text" ng-model="Sex" ng-disabled="!edit" placeholder="Sex">
+								  <br>
+									<label>Major:</label>
+									<input class="w3-input w3-border" type="text" ng-model="Major" ng-disabled="!edit" placeholder="Major">
+								  <br>
+									<label>Password:</label>
+									<input class="w3-input w3-border" type="password" ng-model="passw1" placeholder="Password">
+								  <br>
+									<label>Repeat:</label>
+									<input class="w3-input w3-border" type="password" ng-model="passw2" placeholder="Repeat Password">
+								  <br>
+								  <button class="w3-btn w3-green w3-ripple" ng-click="saveChange()" ng-disabled="error || incomplete">&#10004; Save Changes</button>
+								</form>
+
+							</div>							
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /Homework6 Modal -->
+
+					  </div>
+					</div>
+				</div>
+               
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework2">Homework#2 </a></h3>
+					</div>
+					<!-- Homework2 Modal -->
+					<div  id="Homework2" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">Homework#2: </h4>
+						  </div>
+						  <div class="modal-body">
+						  
+						    <div ng-cloak ng-controller="home2Ctrl" class="w3-card-2 w3-margin" style="max-width:400px;">
+								<header class="w3-container w3-light-grey w3-padding-16">
+									<h3>My Todo List</h3><h4><span>{{remaining()}} remaining</span></h4>
+								<div>
+									<button ng-click="markAllDone()" class="w3-btn w3-green">Mark All Done</button>
+									<button ng-click="clearAllTodos()" class="w3-btn w3-green">Clear All Todos</button>
+								</div>
+								</header>
+								<ul class="w3-ul">
+									<li ng-repeat="x in todoList | incomFilter" class="w3-padding-16">
+									<input type="checkbox" ng-click="removeList(x.name)">
+									{{x.name}}
+									<!-- <span ng-click="removeList(x.name)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li> -->
+								</ul>
+								<form ng-submit="addTodoList()">
+								<div class="w3-container w3-light-grey w3-padding-16">
+									<div class="w3-row w3-margin-top">
+										<div class="w3-col s10">
+											<input  placeholder="Add Todo list here" ng-model="addName" class="w3-input w3-border w3-padding">
+										</div>
+									<div class="w3-col s2">
+										<button ng-click="addTodoList()" class="w3-btn w3-padding w3-green">Add</button>
+									</div>
+								</div>
+								</form>
+									<p class="w3-padding-left w3-text-red">{{errortext}}</p>
+								</div>
+							</div>
+						
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /Homework2 Modal -->
+
+					  </div>
+					</div>
+				</div>
+
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework3">Homework#3 </a></h3>
+					</div>
+					<!-- Homework3 Modal -->
+					<div ng-controller="home3Ctrl"  id="Homework3" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div  class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4  class="modal-title">Homework#3: </h4>
+									<p>Expression: {{expression}}</p>
+									<p>SignDisable: {{signDisable}}</p>
+									<p>NumDisable: {{numDisable}}</p>
+									<p>EqualDisable: {{equalDisable}}</p>
+									<p>DotDisable: {{dotDisable}}</p>
+								</div>
+								<div class="modal-body">
+
+									<div id="calculator" class="calBox"  >	
+										<div class="calu">
+											<input type="text" ng-model="calResult">    	
+											<ul>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('7')" ng-disabled="numDisable">7</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('8')" ng-disabled="numDisable">8</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('9')" ng-disabled="numDisable">9</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="" ng-disabled=true>+/-</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="clearCal()" >C</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('4')" ng-disabled="numDisable">4</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('5')" ng-disabled="numDisable">5</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('6')" ng-disabled="numDisable">6</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="signClick('-')" ng-disabled="signDisable">-</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="signClick('*')" ng-disabled="signDisable">*</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('1')" ng-disabled="numDisable">1</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('2')" ng-disabled="numDisable">2</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('3')" ng-disabled="numDisable">3</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="signClick('+')" ng-disabled="signDisable">+</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="signClick('/')" ng-disabled="signDisable">/</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('0')" ng-disabled="numDisable">0</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="numClick('00')" ng-disabled="numDisable">00</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="dotClick()" ng-disabled="dotDisable">.</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="" ng-disabled=true>Back</button></li>
+												<li><button class="buttonStyle btn btn-default" ng-click="getResult()" ng-disabled="equalDisable">=</button></li>                     
+											</ul>
+										</div>
+									</div>
+								
+							
+								</div>
+								<div class="modal-footer">
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework4">Homework#4 </a></h3>
+					</div>
+					<!-- Homework4 Modal -->
+					<div  id="Homework4" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">Homework4: </h4>
+						  </div>
+						  <div ng-controller="home4Ctrl" class="modal-body">
+								<ul><h4>Original:</h4>
+									<li ng-repeat="num in numberArray">
+									{{num}}
+								</ul>
+								<ul><h4>Ordinal Filter:</h4>
+									<li ng-repeat="num in numberArray | ordinalFilter">
+									{{num}}
+								</ul>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /Homework4 Modal -->
+
+					  </div>
+					</div>
+				</div>
+
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#DigitalClock">DigitalClock </a></h3>
+					</div>
+					<!-- DigitalClock Modal -->
+					<div  id="DigitalClock" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">DigitalClock: </h4>
+						  </div>
+						  <div ng-controller="DigitalClockCtrl" class="modal-body">
+								<h1 class="text-center">Digital Clock</h1>
+								<div class="alert alert-info text-center clock">{{theclock}}</div>								
+								<div digital-clock></div>						
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /DigitalClock Modal -->
+
+					  </div>
+					</div>
+				</div>
+
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework5">Homework#5 </a></h3>
+					</div>
+					<!-- Homework5 Modal -->
+					<div  id="Homework5" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">Homework5: </h4>
+						  </div>
+						  <div  class="modal-body">
+								<p><input type="text" ng-model="fullName"></p>
+								<home5-div ng-show="fullName.length"></home5-div>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /Homework5 Modal -->
+
+					  </div>
+					</div>
+				</div>
+
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework7">Homework#7 </a></h3>
+					</div>
+					<!-- Homework7 Modal -->
+					<div id="Homework7" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">Homework#7: </h4>
+						  </div>
+						  <div class="modal-body">						  
+							<div class="w3-container">								
+								<div ng-view></div>
+							</div>							
+						  </div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /Homework7 Modal -->
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+				    <div class="col-lg-12">
+					    <h3><a data-toggle="modal" data-target="#Homework9">Homework#9 </a></h3>
+					</div>
+					<!-- Homework9 Modal -->
+					<div ng-controller="hw9Ctrl" id="Homework9" class="modal fade" role="dialog">
+					  <div class="modal-dialog modal-lg">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div  class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4  class="modal-title">Homework#9: </h4>
+						  </div>
+						  <div class="modal-body">						  
+							<div class="w3-container">								
+								{{persons}}
+							</div>							
+						  </div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+						<!-- /Homework9 Modal -->
+						</div>
+					</div>
+				</div>
+	
+
+			</div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+	
+	
+	<!-- jQuery -->
+    <script src="js/jquery.js"></script>
+	
+	<!-- angularjs -->
+	<script src="js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular-route.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+	<!-- custom Angular js -->
+	<script src= "js/myAngularJS.js"></script>
+	
+	<!-- dirPagination js -->
+	<script src= "js/dirPagination.js"></script>
+	
+	<script>
+	</script>
+
+
+</body>
+
+</html>

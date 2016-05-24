@@ -1,0 +1,52 @@
+<h3>Users</h3>
+								<form class="form-inline">
+									<div class="form-group">
+										<label> Search </label>
+										<input type="text" ng-model="search" class="form-control" placeholder="Search">
+									</div>
+								</form>
+								<table class="w3-table w3-bordered w3-striped">
+								  <tr>
+									<th>Edit</th>
+									<th>Delete</th>
+									<th ng-click="sort('id')">Id
+										<span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('fName')">First Name
+										<span class="glyphicon sort-icon" ng-show="sortKey=='fName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('lName')">Last Name
+										<span class="glyphicon sort-icon" ng-show="sortKey=='lName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('Age')">Age
+										<span class="glyphicon sort-icon" ng-show="sortKey=='Age'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('Sex')">Sex
+										<span class="glyphicon sort-icon" ng-show="sortKey=='Sex'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+									<th ng-click="sort('Major')">Major
+										<span class="glyphicon sort-icon" ng-show="sortKey=='Major'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+									</th>
+								  </tr>
+								  <tr dir-paginate = "user in users | orderBy:sortKey:reverse | filter:search | itemsPerPage:5">
+									<td>
+									  <a href="#/hw7Edit/{{ user.id }}">Edit</a><br/>
+									</td>
+									<td>
+									  <button class="w3-btn w3-ripple" ng-click="deleteUser(user.id)">Delete</button>
+									</td>
+									<td>{{ user.id }}</td>
+									<td>{{ user.fName }}</td>
+									<td>{{ user.lName }}</td>
+									<td>{{ user.Age }}</td>
+									<td>{{ user.Sex }}</td>
+									<td>{{ user.Major }}</td>									
+								  </tr>
+								</table>
+								<dir-pagination-controls
+								   max-size="5"
+								   direction-links="true"
+								   boundary-links="true" >
+								</dir-pagination-controls>
+								<br>
+								<a href="#/hw7Create">Create New User</a><br/>

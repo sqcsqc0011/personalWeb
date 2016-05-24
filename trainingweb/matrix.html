@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Qucheng Shen</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+
+</head>
+
+<body ng-app='myApp'>
+
+    <div ng-controller="matrixCtrl">
+	<form>
+		<input type='number' ng-model="numGet">
+		<button type='button' ng-click='quizGetAnswer()' class = 'btn left-btn btn-sm btn-primary'>Submit</button>
+		<br>Result : <br>
+		<table>
+			<tr ng-repeat="nums in result">
+				<td>{{ nums }}</td>
+			</tr>
+		</table>
+	</form>
+    </div>
+	
+	
+	<!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+	
+	<!-- angularjs -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+	
+<script>
+	
+	var myApp = angular.module('myApp', []);
+	
+	myApp.controller('matrixCtrl', function($scope) {
+		$scope.quizGetAnswer = function(){
+			var begin = 1;
+			var circle = 0;
+			$scope.result = new Array($scope.numGet);
+			var num = $scope.numGet;
+			for( var i = 0; i <$scope.numGet; i++){
+				$scope.result[i] = new Array();
+			}
+			if(num == 0) $scope.result[0][0] = 0;
+			else getMatrix(num, begin, circle, $scope.result);
+		};
+	});
+	
+	function getMatrix(num, begin, circle, result){
+		num = parseInt(num);
+		if(num <= 0) {
+			return;
+		}
+		else if( num == 1 ) {
+			result[circle][circle] = begin;
+			return;
+		}
+		for( var i = 0; i <= num - 1; i++){
+			result[circle][i + circle] = begin + i;
+		}
+		for( var i = 1; i <= num - 1; i++){
+			result[i + circle][num + circle - 1] = begin + num - 1 + i;
+		}
+		for( var i = 1; i<= num - 1; i++){
+			result[num + circle - 1][num + circle - 1 - i] = begin + 2*num - 2 + i;
+		}
+		for(var i = 1; i<= num - 2;i++){
+			result[num + circle - 1 - i][circle] = begin + 3*num - 3 + i;
+		}
+		begin = begin + 4*num - 4;
+		circle++;
+		num = num - 2;
+		getMatrix(num,begin,circle, result);
+	}
+
+	function quizGetAnswer(){
+		document.getElementById("stringResult").innerHTML = "";
+		var num = document.getElementById("stringEntry").value;
+		$("#stringResult" ).append("<br>");
+		
+		for( var i = 0; i< result.length ; i++){
+			for(var j = 0; j<result[i].length; j ++){
+				$("#stringResult" ).append(result[i][j] + ",");
+			}
+			$("#stringResult" ).append("<br>");
+		}	
+}
+	
+</script>
+
+
+</body>
+
+</html>
